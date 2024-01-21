@@ -1,0 +1,118 @@
+Connection of nodes and edges are graphs
+
+There are two types of graphs : directed and undirected.
+The circular objects are nodes or vertexes . 
+The line connection between two nodes is an edge . edge can be undirectional or  directional . (undirected edge means mostly bidirectional)
+
+If there is an edge in a undirected graph , it generally means bidirectional graph .
+edges in directed graph are directional
+
+cycle in a graph is starting at a node and then ending back at the node. 
+alteast one cycle then cyclic graph . no cycle means acyclic
+
+path means it contains a lot of nodes and all of them are reachable . a node cannot appear twice in a path
+
+degree of a node is number of edges connecting to the node . total degree = 2*number of edges . This is for undirected graph
+For directed graph we have indegree and outdegree
+
+edge weight is means like length . if not assigned then assume unit weight
+
+-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
+
+Graph representation in cpp:
+
+First will say directed or undirected graph .
+Then 'n' nodes and 'm' edges . so input n and m
+
+then m lines which represent the edges given like n1 and n2 all this will tell about how edges are connected
+
+Next to store we can use matrix or list:
+
+Adjacency matrix:  if 1-based indexing then declare matrix as mat[n+1][n+1] and initialise to zero
+
+Then read the m lines and if suppose connection btw 1 and 2 nodes then in matrix put one for [1][2] and [2][1] .
+Now this matrix can be used to check if edges by checking if value is 1 .
+Space used is N*N . Time is O(N).
+
+code:
+<<<<<<<<<<<<<<<<<
+
+#include<iostream>
+using namespace std;
+
+int main(){
+    int n , m;
+    cin>>n>>m;
+
+    int matrix[n+1][n+1] = {0};
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin>>u>>v;
+        matrix[u][v] = 1; //ie saying that there is an egde btw node u and node v . we don't know node value
+        matrix[v][u] = 1;
+    }
+}  
+
+>>>>>>>>>>>>>>>>>>>>>
+
+To avoid space , we can use adjacency list which takes 2N space . for directed graph only N space .
+What we do now is we create a vector list for each node and when looping through the edges we add them as neighbours in the vector array which is the value of node.
+
+code:
+<<<<<<<<<<<<<<<<<<<
+
+#include<iostream>
+#include <vector>
+using namespace std;
+
+int main(){
+    int n , m;
+    cin>>n>>m;
+
+    vector<int> matrix[n+1];
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin>>u>>v;
+        matrix[u].push_back(v);  //updating a node b is it's neighbour
+        matrix[v].push_back(u);  //updating b node that a is it's neighbour
+    }
+}
+
+
+In case if weighted graphs : if storing as matrix instead of storing 1 put the edge weight instead
+                              if stroing as list then in the vector int don't store as neighbours put pairs inside the vector int . pair ->(neighbour,weight)
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Traversal for COMPONENTS:
+
+There are components in a graph.They are like indiviual graphs by themselves but not connected together on the overall
+
+While doing traversal , you won't be able to visit other components while in one component . 
+
+How to do traversal if the graph has multiple compononents:
+
+Create a array visited equal to zero . do a for loop between a zero to number of nodes . Check if the node is visited , if not call the traversal method .
+IF only one COMPONENT is there then full traversed and loop exited . If multiple components present loop runs 
+
+So traversal algo pattern is create a visited array for each node and traverse the array to see if each node is visited if not then then call traversal algo .
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
+
+Traversal techniques to solve graph problems:
+
+
+
+
+
